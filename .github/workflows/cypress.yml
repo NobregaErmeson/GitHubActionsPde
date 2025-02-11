@@ -1,0 +1,29 @@
+name: Cypress Tests UI Run on Pipeline
+
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: npm i
+      - name: 'Run Cypress tests'
+        run: npx cypress run
+      - uses: actions/checkout@v4
+      - uses: cypress-io/github-action@v6
+      # after the test run completes store videos and any screenshots
+      - uses: actions/upload-artifact@v4
+      # add the line below to store screenshots only on failures
+      # if: failure()
+        with:
+            name: cypress-screenshots
+            path: cypress/screenshots
+            if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      - uses: actions/upload-artifact@v4
+        with:
+            name: cypress-videos
+            path: cypress/videos
+            if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+          
