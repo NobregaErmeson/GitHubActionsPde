@@ -12,7 +12,7 @@
     "cypress",
     "xpeducacao"
   ],
-  "author": "Bárbara Cabral",
+  "author": "Ermeson Nóbrega",
   "license": "ISC",
   "dependencies": {
     "cypress": "^10.11.0"
